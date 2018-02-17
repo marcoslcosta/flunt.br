@@ -23,5 +23,12 @@ namespace Flunt.Br.Validation
                 contract.AddNotification(property, message);
             return contract;
         }
+
+        public static Contract IsVoter(this Contract contract, string value, string property, string message)
+        {
+            if (!new Voter().Validate(value))
+                contract.AddNotification(property, message);
+            return contract;
+        }
     }
 }
