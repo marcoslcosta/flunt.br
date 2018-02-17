@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Flunt.Br.Document
 {
-    public class Voter : IValidate
+    internal class Voter : IValidate
     {
         public bool Validate(string value)
         {
