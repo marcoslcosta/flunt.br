@@ -8,8 +8,7 @@ namespace Flunt.Br.Validation
     {
         public static Contract IsCpf(this Contract contract, string value, string property, string message)
         {
-            var cpfValidate = new Cpf();
-            if (!cpfValidate.Validate(value))
+            if (!new Cpf().Validate(value))
                 contract.AddNotification(property, message);
             return contract;
         }
