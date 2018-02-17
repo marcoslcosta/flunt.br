@@ -1,5 +1,6 @@
 using Flunt.Br.Document.interfaces;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace Flunt.Br.Document
 {
@@ -7,6 +8,8 @@ namespace Flunt.Br.Document
     {
         public bool Validate(string value)
         {
+            value = new Regex(@"['\""&,\\]|\s{2,}").Replace(value, "").Trim();
+            if (!new Regex(@"[0-9]+").IsMatch(value)) return false;
         
             if (value.All(char.IsDigit) == false)
             {

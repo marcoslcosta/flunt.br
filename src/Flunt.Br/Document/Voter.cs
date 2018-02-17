@@ -11,7 +11,7 @@ namespace Flunt.Br.Document
         {
             int d1, d2, d3, d4, d5, d6, d7, d8, d9, d10, d11, d12, DV1, DV2, UltDig;
 
-            value = new Regex(@"['\""&,\\]|\s{2,}").Replace(value, "");
+            value = new Regex(@"['\""&,\\]|\s{2,}").Replace(value, "").Trim();
             if (!new Regex(@"[0-9]+").IsMatch(value)) return false;
             if ((value.Length < 12))
             {
