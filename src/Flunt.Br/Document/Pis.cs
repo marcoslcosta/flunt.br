@@ -7,6 +7,8 @@ namespace Flunt.Br.Document
     {
         public bool Validate(string value)
         {
+            if (string.IsNullOrEmpty(value.Trim())) return false;
+            
             value = new Regex(@"\.|\-").Replace(value, "");
             int[] multiplicador = new int[10] { 3, 2, 9, 8, 7, 6, 5, 4, 3, 2 };
             int soma;
