@@ -4,7 +4,7 @@ using System.Text.RegularExpressions;
 
 namespace Flunt.Br.Document
 {
-    public class Renavam : IValidate
+    internal class Renavam : IValidate
     {
         public bool Validate(string value)
         {

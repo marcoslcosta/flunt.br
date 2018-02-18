@@ -12,5 +12,13 @@ namespace Flunt.Br.Validation
                 contract.AddNotification(property, message);
             return contract;
         }
+
+        public static Contract IsLicensePlate(this Contract contract, string value, string property, string message)
+        {
+            if (!new LicensePlate().Validate(value))
+                contract.AddNotification(property, message);
+            return contract;
+        }
+        
     }
 }

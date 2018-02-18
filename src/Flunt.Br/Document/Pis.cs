@@ -3,7 +3,7 @@ using System.Text.RegularExpressions;
 
 namespace Flunt.Br.Document
 {
-    public class Pis : IValidate
+    internal class Pis : IValidate
     {
         public bool Validate(string value)
         {
