@@ -13,16 +13,7 @@ namespace Flunt.Br.Validation
             return contract;
         }
 
-        [Obsolete("Use IsCnpj(contract, value, property, message)")]
-        public static bool ValidateCnpj(string cnpj) => new Cnpj().Validate(cnpj);
-
-        public static Contract IsCnpj(this Contract contract, string value, string property, string message)
-        {
-            if (!new Cnpj().Validate(value))
-                contract.AddNotification(property, message);
-            return contract;
-        }
-
+       
         public static Contract IsVoterDocument(this Contract contract, string value, string property, string message)
         {
             if (!new VoterDocument().Validate(value))
