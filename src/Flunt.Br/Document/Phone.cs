@@ -15,7 +15,21 @@ namespace Flunt.Br.Document
         public Phone(string numberFormat)
         {
             var regex = new Regex(@"[0-9]+");
-            var phonePattern = Regex.Replace(numberFormat, @"[0-9]+", m => $@"\d{{{m.Length}}}");;
+            var phonePattern = Regex.Replace(numberFormat, @"[0-9,?]+", m => { 
+                var optionalsCount = m.Value.Split(new char[] { '?' }).Length - 1;
+                var stringRegex = "";
+                if(optionalsCount != 0)
+                {
+                    stringRegex += (m.Length - optionalsCount);
+                    stringRegex += ",";
+                    stringRegex += (optionalsCount + (m.Length - optionalsCount));
+                }
+                else
+                {
+                     stringRegex = m.Length.ToString();
+                }
+                return $@"\d{{{stringRegex}}}";
+            });
             phonePattern = @"^" + Regex.Replace(phonePattern, @"(?:(?(1)(?!))(\+)|(?(2)(?!))(\()|(?(3)(?!))(\)))+", m => $@"\{m.Value}").Replace("-", @"\-").Replace(" ", @"\s") + "$";
             this.format = new Regex(phonePattern);
         }

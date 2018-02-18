@@ -12,10 +12,10 @@ namespace Flunt.Br.Tests
         [DataRow("521586453135936245")]
         [DataRow("601138410090657947")]
         [DataRow("3559716521958")]
-        public void IsCredCard_Invalid(string value)
+        public void IsCreditCard_Invalid(string value)
         {
             var wrong = new Contract()
-                .IsCredCard(value, "document", "Invalid document");
+                .IsCreditCard(value, "document", "Invalid document");
             Assert.IsFalse(wrong.Valid);
         }
 
@@ -24,10 +24,10 @@ namespace Flunt.Br.Tests
         [DataRow("5215804531352362")]
         [DataRow("6011364100907579")]
         [DataRow("3559714521955133")]
-        public void IsCredCard_Valid(string value)
+        public void IsCreditCard_Valid(string value)
         {
             var right = new Contract()
-                .IsCredCard(value, "document", "Invalid document");
+                .IsCreditCard(value, "document", "Invalid document");
             Assert.IsTrue(right.Valid);
         }
     }

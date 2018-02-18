@@ -52,10 +52,10 @@ namespace Flunt.Br.Tests
         [DataRow("668247690132")]
         [DataRow("333438450601")]
         [DataRow("6568351232550")]
-        public void IsVoter_InValid(string value)
+        public void IsVoterDocument_InValid(string value)
         {
             var wrong = new Contract()
-                .IsVoter(value, "document", "Invalid document");
+                .IsVoterDocument(value, "document", "Invalid document");
             Assert.IsFalse(wrong.Valid);
         }
 
@@ -63,10 +63,10 @@ namespace Flunt.Br.Tests
         [DataRow("668247670132")]
         [DataRow("333438450701")]
         [DataRow("656835882550")]
-        public void IsVoter_Valid(string value)
+        public void IsVoterDocument_Valid(string value)
         {
             var right = new Contract()
-                .IsVoter(value, "document", "Invalid document");
+                .IsVoterDocument(value, "document", "Invalid document");
             Assert.IsTrue(right.Valid);
         }
     }

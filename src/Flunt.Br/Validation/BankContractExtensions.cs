@@ -6,10 +6,10 @@ namespace Flunt.Br.Validation
 {
     public static partial class ContractExtensions
     {
-         public static Contract IsCredCard(this Contract contract, string value, string property, string message)
+         public static Contract IsCreditCard(this Contract contract, string value, string property, string message)
         {
        
-            if (!new CredCard().Validate(value))
+            if (!new CreditCard().Validate(value))
                 contract.AddNotification(property, message);
             return contract;
         }

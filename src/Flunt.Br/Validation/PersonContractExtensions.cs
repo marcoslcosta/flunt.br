@@ -23,9 +23,9 @@ namespace Flunt.Br.Validation
             return contract;
         }
 
-        public static Contract IsVoter(this Contract contract, string value, string property, string message)
+        public static Contract IsVoterDocument(this Contract contract, string value, string property, string message)
         {
-            if (!new Voter().Validate(value))
+            if (!new VoterDocument().Validate(value))
                 contract.AddNotification(property, message);
             return contract;
         }
