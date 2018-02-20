@@ -20,7 +20,7 @@ namespace Flunt.Br.Validation
 
         public static Contract IsStateRegistration(this Contract contract, string value, StateEnum state, string property, string message)
         {
-            if (!new Cnpj().Validate(value))
+            if (!new StateRegistration(state).Validate(value))
                 contract.AddNotification(property, message);
             return contract;
         }
