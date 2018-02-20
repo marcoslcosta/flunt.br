@@ -7,6 +7,11 @@ namespace Flunt.Br.Document
     internal class StateRegistration : IValidate
     {
 
+        internal StateRegistration(StateEnum state)
+        {
+            this.State = state;
+
+        }
         private StateEnum State { get; set; }
         private string strBase;
         private string strBase2;
@@ -19,11 +24,6 @@ namespace Flunt.Br.Document
         private int intResto;
         private int intNumero;
         private int intPeso = 0;
-
-        public StateRegistration(StateEnum state)
-        {
-            this.State = state;
-        }
         public bool Validate(string value)
         {
             bool retorno = false;
@@ -50,89 +50,11 @@ namespace Flunt.Br.Document
                     return this.Amapa(value, strOrigem);
                 case StateEnum.Bahia:
                     return this.Bahia(value, strOrigem);
-                case "CE":
-
-                    #region
-
-                    strBase = (strOrigem.Trim() + "000000000").Substring(0, 9);
-                    intSoma = 0;
-
-                    for (intPos = 1; (intPos <= 8); intPos++)
-                    {
-                        intValor = int.Parse(strBase.Substring((intPos - 1), 1));
-                        intValor = (intValor * (10 - intPos));
-                        intSoma = (intSoma + intValor);
-                    }
-
-                    intResto = (intSoma % 11);
-                    intValor = (11 - intResto);
-
-                    if ((intValor > 9))
-                        intValor = 0;
-
-                    strDigito1 = Convert.ToString(intValor).Substring((Convert.ToString(intValor).Length - 1));
-
-                    strBase2 = (strBase.Substring(0, 8) + strDigito1);
-
-                    if ((strBase2 == strOrigem))
-                        retorno = true;
-
-                    #endregion
-
-                    break;
-
-                case "DF":
-
-                    #region
-
-                    strBase = (strOrigem.Trim() + "0000000000000").Substring(0, 13);
-
-                    if ((strBase.Substring(0, 3) == "073"))
-                    {
-                        intSoma = 0;
-                        intPeso = 2;
-
-                        for (intPos = 11; (intPos >= 1); intPos = (intPos + -1))
-                        {
-                            intValor = int.Parse(strBase.Substring((intPos - 1), 1));
-                            intValor = (intValor * intPeso);
-                            intSoma = (intSoma + intValor);
-                            intPeso = (intPeso + 1);
-
-                            if ((intPeso > 9))
-                                intPeso = 2;
-                        }
-
-                        intResto = (intSoma % 11);
-                        strDigito1 = ((intResto < 2) ? "0" : Convert.ToString((11 - intResto))).Substring((((intResto < 2) ? "0" : Convert.ToString((11 - intResto))).Length - 1));
-                        strBase2 = (strBase.Substring(0, 11) + strDigito1);
-                        intSoma = 0;
-                        intPeso = 2;
-
-                        for (intPos = 12; (intPos >= 1); intPos = (intPos + -1))
-                        {
-                            intValor = int.Parse(strBase.Substring((intPos - 1), 1));
-                            intValor = (intValor * intPeso);
-                            intSoma = (intSoma + intValor);
-                            intPeso = (intPeso + 1);
-
-                            if ((intPeso > 9))
-                                intPeso = 2;
-                        }
-
-                        intResto = (intSoma % 11);
-                        strDigito2 = ((intResto < 2) ? "0" : Convert.ToString((11 - intResto))).Substring((((intResto < 2) ? "0" : Convert.ToString((11 - intResto))).Length - 1));
-                        strBase2 = (strBase.Substring(0, 12) + strDigito2);
-
-                        if ((strBase2 == strOrigem))
-                            retorno = true;
-                    }
-
-                    #endregion
-
-                    break;
-
-                case "ES":
+                case StateEnum.Ceara:
+                    return this.Ceara(value, strOrigem);
+                case StateEnum.DistritoFederal:
+                    return this.DistritoFederal(value, strOrigem);
+                case StateEnum.EspiritoSanto:
 
                     #region
 
@@ -157,7 +79,7 @@ namespace Flunt.Br.Document
 
                     break;
 
-                case "GO":
+                case StateEnum.Goias:
 
                     #region
 
@@ -196,7 +118,7 @@ namespace Flunt.Br.Document
 
                     break;
 
-                case "MA":
+                case StateEnum.Maranhao:
 
                     #region
 
@@ -225,7 +147,7 @@ namespace Flunt.Br.Document
 
                     break;
 
-                case "MT":
+                case StateEnum.MatoGrosso:
                     #region
 
                     strBase = (strOrigem.Trim() + "0000000000").Substring(0, 10);
@@ -253,7 +175,7 @@ namespace Flunt.Br.Document
                     #endregion
 
                     break;
-                case "MS":
+                case StateEnum.MatoGrossoDoSul:
                     #region
 
                     strBase = (strOrigem.Trim() + "000000000").Substring(0, 9);
@@ -281,7 +203,7 @@ namespace Flunt.Br.Document
 
                     break;
 
-                case "MG":
+                case StateEnum.MinasGerais:
 
                     #region
 
@@ -347,7 +269,7 @@ namespace Flunt.Br.Document
 
                     break;
 
-                case "PA":
+                case StateEnum.Para:
 
                     #region
 
@@ -376,7 +298,7 @@ namespace Flunt.Br.Document
 
                     break;
 
-                case "PB":
+                case StateEnum.Paraiba:
 
                     #region
 
@@ -406,7 +328,7 @@ namespace Flunt.Br.Document
 
                     break;
 
-                case "PE":
+                case StateEnum.Pernambuco:
                     #region
 
                     strBase = (strOrigem.Trim() + "00000000000000").Substring(0, 14);
@@ -469,7 +391,7 @@ namespace Flunt.Br.Document
 
                     break;
 
-                case "PI":
+                case StateEnum.Piaui:
                     #region
 
                     strBase = (strOrigem.Trim() + "000000000").Substring(0, 9);
@@ -493,7 +415,7 @@ namespace Flunt.Br.Document
 
                     break;
 
-                case "PR":
+                case StateEnum.Parana:
                     #region
 
                     strBase = (strOrigem.Trim() + "0000000000").Substring(0, 10);
@@ -539,7 +461,7 @@ namespace Flunt.Br.Document
 
                     break;
 
-                case "RJ":
+                case StateEnum.RioDeJaneiro:
                     #region
 
                     strBase = (strOrigem.Trim() + "00000000").Substring(0, 8);
@@ -568,7 +490,7 @@ namespace Flunt.Br.Document
 
                     break;
 
-                case "RN": //Verficar com 10 digitos
+                case StateEnum.RioGrandeDoNorte: //Verficar com 10 digitos
                     #region
 
                     if (strOrigem.Length == 9)
@@ -619,7 +541,7 @@ namespace Flunt.Br.Document
 
                     break;
 
-                case "RO":
+                case StateEnum.Rondonia:
 
                     strBase = (strOrigem.Trim() + "000000000").Substring(0, 9);
                     strBase2 = strBase.Substring(3, 5);
@@ -646,7 +568,7 @@ namespace Flunt.Br.Document
 
                     break;
 
-                case "RR":
+                case StateEnum.Roraima:
                     #region
 
                     strBase = (strOrigem.Trim() + "000000000").Substring(0, 9);
@@ -674,7 +596,7 @@ namespace Flunt.Br.Document
 
                     break;
 
-                case "RS":
+                case StateEnum.RioGrandeDoSul:
                     #region
 
                     strBase = (strOrigem.Trim() + "0000000000").Substring(0, 10);
@@ -713,7 +635,7 @@ namespace Flunt.Br.Document
 
                     break;
 
-                case "SC":
+                case StateEnum.SantaCatarina:
                     #region
 
                     strBase = (strOrigem.Trim() + "000000000").Substring(0, 9);
@@ -736,7 +658,7 @@ namespace Flunt.Br.Document
 
                     break;
 
-                case "SE":
+                case StateEnum.Sergipe:
                     #region
 
                     strBase = (strOrigem.Trim() + "000000000").Substring(0, 9);
@@ -765,7 +687,7 @@ namespace Flunt.Br.Document
 
                     break;
 
-                case "SP":
+                case StateEnum.SaoPaulo:
                     #region
 
                     if ((strOrigem.Substring(0, 1) == "P"))
@@ -842,7 +764,7 @@ namespace Flunt.Br.Document
 
                     break;
 
-                case "TO":
+                case StateEnum.Tocantins:
                     #region
 
                     strBase = (strOrigem.Trim() + "00000000000").Substring(0, 11);
@@ -937,7 +859,6 @@ namespace Flunt.Br.Document
             }
             return false;
         }
-
         private bool Alagoas(string value, string strOrigem)
         {
 
@@ -970,7 +891,6 @@ namespace Flunt.Br.Document
             }
             return false;
         }
-
         private bool Amazonas(string value, string strOrigem)
         {
             strBase = (strOrigem.Trim() + "000000000").Substring(0, 9);
@@ -997,7 +917,6 @@ namespace Flunt.Br.Document
             return (strBase2 == strOrigem);
 
         }
-
         private bool Amapa(string value, string strOrigem)
         {
             strBase = (strOrigem.Trim() + "000000000").Substring(0, 9);
@@ -1027,7 +946,6 @@ namespace Flunt.Br.Document
             }
             return false;
         }
-
         private bool Bahia(string value, string strOrigem)
         {
             bool retorno = false;
@@ -1204,6 +1122,89 @@ namespace Flunt.Br.Document
             }
             return retorno;
         }
-    }
+        private bool Ceara(string value, string strOrigem)
+        {
+            var retorno = false;
+            strBase = (strOrigem.Trim() + "000000000").Substring(0, 9);
+            intSoma = 0;
 
+            for (intPos = 1; (intPos <= 8); intPos++)
+            {
+                intValor = int.Parse(strBase.Substring((intPos - 1), 1));
+                intValor = (intValor * (10 - intPos));
+                intSoma = (intSoma + intValor);
+            }
+
+            intResto = (intSoma % 11);
+            intValor = (11 - intResto);
+
+            if ((intValor > 9))
+                intValor = 0;
+
+            strDigito1 = Convert.ToString(intValor).Substring((Convert.ToString(intValor).Length - 1));
+
+            strBase2 = (strBase.Substring(0, 8) + strDigito1);
+
+            if ((strBase2 == strOrigem))
+                retorno = true;
+
+            return retorno;
+
+
+        }
+
+        private bool DistritoFederal(string value, string strOrigem)
+        {
+            var retorno = false;
+
+            strBase = (strOrigem.Trim() + "0000000000000").Substring(0, 13);
+
+            if ((strBase.Substring(0, 3) == "073"))
+            {
+                intSoma = 0;
+                intPeso = 2;
+
+                for (intPos = 11; (intPos >= 1); intPos = (intPos + -1))
+                {
+                    intValor = int.Parse(strBase.Substring((intPos - 1), 1));
+                    intValor = (intValor * intPeso);
+                    intSoma = (intSoma + intValor);
+                    intPeso = (intPeso + 1);
+
+                    if ((intPeso > 9))
+                        intPeso = 2;
+                }
+
+                intResto = (intSoma % 11);
+                strDigito1 = ((intResto < 2) ? "0" : Convert.ToString((11 - intResto))).Substring((((intResto < 2) ? "0" : Convert.ToString((11 - intResto))).Length - 1));
+                strBase2 = (strBase.Substring(0, 11) + strDigito1);
+                intSoma = 0;
+                intPeso = 2;
+
+                for (intPos = 12; (intPos >= 1); intPos = (intPos + -1))
+                {
+                    intValor = int.Parse(strBase.Substring((intPos - 1), 1));
+                    intValor = (intValor * intPeso);
+                    intSoma = (intSoma + intValor);
+                    intPeso = (intPeso + 1);
+
+                    if ((intPeso > 9))
+                        intPeso = 2;
+                }
+
+                intResto = (intSoma % 11);
+                strDigito2 = ((intResto < 2) ? "0" : Convert.ToString((11 - intResto))).Substring((((intResto < 2) ? "0" : Convert.ToString((11 - intResto))).Length - 1));
+                strBase2 = (strBase.Substring(0, 12) + strDigito2);
+
+                if ((strBase2 == strOrigem))
+                    retorno = true;
+
+
+            }
+
+            return retorno;
+        }
+
+
+    }
 }
