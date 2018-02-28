@@ -55,154 +55,15 @@ namespace Flunt.Br.Document
                 case StateEnum.DistritoFederal:
                     return this.DistritoFederal(value, strOrigem);
                 case StateEnum.EspiritoSanto:
-
-                    #region
-
-                    strBase = (strOrigem.Trim() + "000000000").Substring(0, 9);
-                    intSoma = 0;
-
-                    for (intPos = 1; (intPos <= 8); intPos++)
-                    {
-                        intValor = int.Parse(strBase.Substring((intPos - 1), 1));
-                        intValor = (intValor * (10 - intPos));
-                        intSoma = (intSoma + intValor);
-                    }
-
-                    intResto = (intSoma % 11);
-                    strDigito1 = ((intResto < 2) ? "0" : Convert.ToString((11 - intResto))).Substring((((intResto < 2) ? "0" : Convert.ToString((11 - intResto))).Length - 1));
-                    strBase2 = (strBase.Substring(0, 8) + strDigito1);
-
-                    if ((strBase2 == strOrigem))
-                        retorno = true;
-
-                    #endregion
-
-                    break;
-
+                    return this.EspitoSanto(value, strOrigem);
                 case StateEnum.Goias:
-
-                    #region
-
-                    strBase = (strOrigem.Trim() + "000000000").Substring(0, 9);
-
-                    if ((("10,11,15".IndexOf(strBase.Substring(0, 2), 0, System.StringComparison.OrdinalIgnoreCase) + 1) > 0))
-                    {
-                        intSoma = 0;
-
-                        for (intPos = 1; (intPos <= 8); intPos++)
-                        {
-                            intValor = int.Parse(strBase.Substring((intPos - 1), 1));
-                            intValor = (intValor * (10 - intPos));
-                            intSoma = (intSoma + intValor);
-                        }
-
-                        intResto = (intSoma % 11);
-
-                        if ((intResto == 0))
-                            strDigito1 = "0";
-                        else if ((intResto == 1))
-                        {
-                            intNumero = int.Parse(strBase.Substring(0, 8));
-                            strDigito1 = (((intNumero >= 10103105) && (intNumero <= 10119997)) ? "1" : "0").Substring(((((intNumero >= 10103105) && (intNumero <= 10119997)) ? "1" : "0").Length - 1));
-                        }
-                        else
-                            strDigito1 = Convert.ToString((11 - intResto)).Substring((Convert.ToString((11 - intResto)).Length - 1));
-
-                        strBase2 = (strBase.Substring(0, 8) + strDigito1);
-
-                        if ((strBase2 == strOrigem))
-                            retorno = true;
-                    }
-
-                    #endregion
-
-                    break;
-
+                    return this.Gois(value, strOrigem);
                 case StateEnum.Maranhao:
-
-                    #region
-
-                    strBase = (strOrigem.Trim() + "000000000").Substring(0, 9);
-
-                    if ((strBase.Substring(0, 2) == "12"))
-                    {
-                        intSoma = 0;
-
-                        for (intPos = 1; (intPos <= 8); intPos++)
-                        {
-                            intValor = int.Parse(strBase.Substring((intPos - 1), 1));
-                            intValor = (intValor * (10 - intPos));
-                            intSoma = (intSoma + intValor);
-                        }
-
-                        intResto = (intSoma % 11);
-                        strDigito1 = ((intResto < 2) ? "0" : Convert.ToString((11 - intResto))).Substring((((intResto < 2) ? "0" : Convert.ToString((11 - intResto))).Length - 1));
-                        strBase2 = (strBase.Substring(0, 8) + strDigito1);
-
-                        if ((strBase2 == strOrigem))
-                            retorno = true;
-                    }
-
-                    #endregion
-
-                    break;
-
+                    return this.Maranhao(value, strOrigem);
                 case StateEnum.MatoGrosso:
-                    #region
-
-                    strBase = (strOrigem.Trim() + "0000000000").Substring(0, 10);
-                    intSoma = 0;
-                    intPeso = 2;
-
-                    for (intPos = 10; intPos >= 1; intPos = (intPos + -1))
-                    {
-                        intValor = int.Parse(strBase.Substring((intPos - 1), 1));
-                        intValor = (intValor * intPeso);
-                        intSoma = (intSoma + intValor);
-                        intPeso = (intPeso + 1);
-
-                        if ((intPeso > 9))
-                            intPeso = 2;
-                    }
-
-                    intResto = (intSoma % 11);
-                    strDigito1 = ((intResto < 2) ? "0" : Convert.ToString((11 - intResto))).Substring((((intResto < 2) ? "0" : Convert.ToString((11 - intResto))).Length - 1));
-                    strBase2 = (strBase.Substring(0, 10) + strDigito1);
-
-                    if ((strBase2 == strOrigem))
-                        retorno = true;
-
-                    #endregion
-
-                    break;
+                    return this.MatoGrosso(value, strOrigem);
                 case StateEnum.MatoGrossoDoSul:
-                    #region
-
-                    strBase = (strOrigem.Trim() + "000000000").Substring(0, 9);
-
-                    if ((strBase.Substring(0, 2) == "28"))
-                    {
-                        intSoma = 0;
-
-                        for (intPos = 1; (intPos <= 8); intPos++)
-                        {
-                            intValor = int.Parse(strBase.Substring((intPos - 1), 1));
-                            intValor = (intValor * (10 - intPos));
-                            intSoma = (intSoma + intValor);
-                        }
-
-                        intResto = (intSoma % 11);
-                        strDigito1 = ((intResto < 2) ? "0" : Convert.ToString((11 - intResto))).Substring((((intResto < 2) ? "0" : Convert.ToString((11 - intResto))).Length - 1));
-                        strBase2 = (strBase.Substring(0, 8) + strDigito1);
-
-                        if ((strBase2 == strOrigem))
-                            retorno = true;
-                    }
-
-                    #endregion
-
-                    break;
-
+                    return this.MatoGrossoDoSul(value, strOrigem);
                 case StateEnum.MinasGerais:
 
                     #region
@@ -1203,6 +1064,150 @@ namespace Flunt.Br.Document
             }
 
             return retorno;
+        }
+
+        private bool EspitoSanto(string value, string strOrigem)
+        {
+            var retorno = false;
+
+            strBase = (strOrigem.Trim() + "000000000").Substring(0, 9);
+            intSoma = 0;
+
+            for (intPos = 1; (intPos <= 8); intPos++)
+            {
+                intValor = int.Parse(strBase.Substring((intPos - 1), 1));
+                intValor = (intValor * (10 - intPos));
+                intSoma = (intSoma + intValor);
+            }
+
+            intResto = (intSoma % 11);
+            strDigito1 = ((intResto < 2) ? "0" : Convert.ToString((11 - intResto))).Substring((((intResto < 2) ? "0" : Convert.ToString((11 - intResto))).Length - 1));
+            strBase2 = (strBase.Substring(0, 8) + strDigito1);
+
+            if ((strBase2 == strOrigem))
+                retorno = true;
+
+
+            return retorno;
+        }
+
+        private bool Gois(string value, string strOrigem)
+        {
+            var retorno = false;
+
+            strBase = (strOrigem.Trim() + "000000000").Substring(0, 9);
+
+            if ((("10,11,15".IndexOf(strBase.Substring(0, 2), 0, System.StringComparison.OrdinalIgnoreCase) + 1) > 0))
+            {
+                intSoma = 0;
+
+                for (intPos = 1; (intPos <= 8); intPos++)
+                {
+                    intValor = int.Parse(strBase.Substring((intPos - 1), 1));
+                    intValor = (intValor * (10 - intPos));
+                    intSoma = (intSoma + intValor);
+                }
+
+                intResto = (intSoma % 11);
+
+                if ((intResto == 0))
+                    strDigito1 = "0";
+                else if ((intResto == 1))
+                {
+                    intNumero = int.Parse(strBase.Substring(0, 8));
+                    strDigito1 = (((intNumero >= 10103105) && (intNumero <= 10119997)) ? "1" : "0").Substring(((((intNumero >= 10103105) && (intNumero <= 10119997)) ? "1" : "0").Length - 1));
+                }
+                else
+                    strDigito1 = Convert.ToString((11 - intResto)).Substring((Convert.ToString((11 - intResto)).Length - 1));
+
+                strBase2 = (strBase.Substring(0, 8) + strDigito1);
+
+                if ((strBase2 == strOrigem))
+                    retorno = true;
+            }
+
+            return retorno;
+        }
+
+        private bool Maranhao(string value, string strOrigem)
+        {
+            var retorno = false;
+
+            strBase = (strOrigem.Trim() + "000000000").Substring(0, 9);
+
+            if ((strBase.Substring(0, 2) == "12"))
+            {
+                intSoma = 0;
+
+                for (intPos = 1; (intPos <= 8); intPos++)
+                {
+                    intValor = int.Parse(strBase.Substring((intPos - 1), 1));
+                    intValor = (intValor * (10 - intPos));
+                    intSoma = (intSoma + intValor);
+                }
+
+                intResto = (intSoma % 11);
+                strDigito1 = ((intResto < 2) ? "0" : Convert.ToString((11 - intResto))).Substring((((intResto < 2) ? "0" : Convert.ToString((11 - intResto))).Length - 1));
+                strBase2 = (strBase.Substring(0, 8) + strDigito1);
+
+                if ((strBase2 == strOrigem))
+                    retorno = true;
+            }
+            return retorno;
+        }
+
+        private bool MatoGrosso(string value, string strOrigem)
+        {
+            var retorno = false;
+            strBase = (strOrigem.Trim() + "0000000000").Substring(0, 10);
+            intSoma = 0;
+            intPeso = 2;
+
+            for (intPos = 10; intPos >= 1; intPos = (intPos + -1))
+            {
+                intValor = int.Parse(strBase.Substring((intPos - 1), 1));
+                intValor = (intValor * intPeso);
+                intSoma = (intSoma + intValor);
+                intPeso = (intPeso + 1);
+
+                if ((intPeso > 9))
+                    intPeso = 2;
+            }
+
+            intResto = (intSoma % 11);
+            strDigito1 = ((intResto < 2) ? "0" : Convert.ToString((11 - intResto))).Substring((((intResto < 2) ? "0" : Convert.ToString((11 - intResto))).Length - 1));
+            strBase2 = (strBase.Substring(0, 10) + strDigito1);
+
+            if ((strBase2 == strOrigem))
+                retorno = true;
+            return retorno;
+        }
+
+        private bool MatoGrossoDoSul(string value, string strOrigem)
+        {
+            var retorno = false;
+            strBase = (strOrigem.Trim() + "000000000").Substring(0, 9);
+
+            if ((strBase.Substring(0, 2) == "28"))
+            {
+                intSoma = 0;
+
+                for (intPos = 1; (intPos <= 8); intPos++)
+                {
+                    intValor = int.Parse(strBase.Substring((intPos - 1), 1));
+                    intValor = (intValor * (10 - intPos));
+                    intSoma = (intSoma + intValor);
+                }
+
+                intResto = (intSoma % 11);
+                strDigito1 = ((intResto < 2) ? "0" : Convert.ToString((11 - intResto))).Substring((((intResto < 2) ? "0" : Convert.ToString((11 - intResto))).Length - 1));
+                strBase2 = (strBase.Substring(0, 8) + strDigito1);
+
+                if ((strBase2 == strOrigem))
+                    retorno = true;
+            }
+            return retorno;
+
         }
 
 
