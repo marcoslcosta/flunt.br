@@ -66,6 +66,42 @@ namespace Flunt.Br.Tests
 
         }
 
+        [TestMethod]
+        [DataRow("01.992.8111/585-39", StateEnum.Acre)]
+        [DataRow("248980723", StateEnum.Alagoas)]
+        [DataRow("03323453", StateEnum.Amapa)]
+        [DataRow("51.967.553-7", StateEnum.Amazonas)]
+        [DataRow("076530-69", StateEnum.Bahia)]
+        [DataRow("59460922-9", StateEnum.Ceara)]
+        [DataRow("07708589001-34", StateEnum.DistritoFederal)]
+        [DataRow("65170854-8", StateEnum.EspiritoSanto)]
+        [DataRow("15.343.693-0", StateEnum.Goias)]
+        [DataRow("12905193-2", StateEnum.Maranhao)]
+        [DataRow("7800789554-9", StateEnum.MatoGrosso)]
+        [DataRow("28947009-7", StateEnum.MatoGrossoDoSul)]
+        [DataRow("067.417.933/1173", StateEnum.MinasGerais)]
+        [DataRow("15-920911-0", StateEnum.Para)]
+        [DataRow("929793455-3", StateEnum.Paraiba)]
+        [DataRow("721.588096-16", StateEnum.Parana)]
+        [DataRow("8971413-09", StateEnum.Pernambuco)]
+        [DataRow("28355823-9", StateEnum.Piaui)]
+        [DataRow("33.379.75-0", StateEnum.RioDeJaneiro)]
+        [DataRow("20.547.127-0", StateEnum.RioGrandeDoNorte)]
+        [DataRow("219/4338732", StateEnum.RioGrandeDoSul)]
+        [DataRow("1430382797740-1", StateEnum.Rondonia)]
+        [DataRow("24189370-7", StateEnum.Roraima)]
+        [DataRow("995.670.562.657", StateEnum.SaoPaulo)]
+        [DataRow("929.589.560", StateEnum.SantaCatarina)]
+        [DataRow("17179905-6", StateEnum.Sergipe)]
+        [DataRow("2903725004-0", StateEnum.Tocantins)]
+
+        public void IsStateRegistration_Invalid(string value, StateEnum state)
+        {
+            var wrong = new Contract()
+             .IsStateRegistration(value, state, "document", "Invalid document");
+            Assert.IsFalse(wrong.Valid);
+
+        }
 
     }
 }
