@@ -1,6 +1,7 @@
 using System;
 using Flunt.Br.Document.Enum;
 using Flunt.Br.Document.interfaces;
+using System.Text.RegularExpressions;
 
 namespace Flunt.Br.Document
 {
@@ -28,9 +29,7 @@ namespace Flunt.Br.Document
         {
             bool retorno = false;
             this.startValidation();
-
-            if ((value.Trim().ToUpper() == "ISENTO"))
-                return true;
+            value = new Regex(@"\.|\-|\\|\/").Replace(value, "");
 
             for (intPos = 1; intPos <= value.Trim().Length; intPos++)
             {
